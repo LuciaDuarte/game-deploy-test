@@ -26,3 +26,17 @@ canvas {
   justify-content: center;
   align-items: center;
 }
+
+#end-game {
+  background-color: green;
+  width: 700px;
+  height: 500px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#typed-words {
+  text-align: center;
+}

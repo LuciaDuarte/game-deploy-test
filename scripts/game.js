@@ -29,10 +29,23 @@ class Game {
 
   stopGame() {
     const canvasElement = document.getElementById('game');
-    const startMenu = document.getElementById('start-game');
+    const endMenu = document.getElementById('end-game');
 
-    startMenu.style.display = 'flex';
+    endMenu.style.display = 'flex';
     canvasElement.style.display = 'none';
+
+    //display words in the end
+    const typedWordsArray = this.player.typedWords;
+
+    const typedWordsDiv = document.getElementById('typed-words');
+
+    for (let word of typedWordsArray) {
+      const wordElement = document.createElement('p');
+      typedWordsDiv.appendChild(wordElement);
+      let description = '';
+      description += word;
+      wordElement.innerText = description;
+    }
   }
 
   loop() {
@@ -44,9 +57,5 @@ class Game {
 
     // Paint
     this.paint();
-
-    //   setTimeout(() => {
-    //     this.loop();
-    //   }, 600);
   }
 }

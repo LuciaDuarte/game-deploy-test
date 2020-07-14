@@ -1,8 +1,10 @@
 window.addEventListener('load', () => {
   const canvasElement = document.getElementById('game');
   const startMenu = document.getElementById('start-game');
+  const endMenu = document.getElementById('end-game');
 
   const startButton = document.getElementById('start-button');
+  const restartButton = document.getElementById('restart-button');
 
   const timerOptions = document.querySelectorAll('input');
 
@@ -35,9 +37,9 @@ window.addEventListener('load', () => {
     }
   }
 
-  // function setTime(timer) {
-  //   if(timer === '15') {
-  //     const time =
-  //   }
-  // }
+  restartButton.addEventListener('click', () => {
+    endMenu.style.display = 'none';
+    startMenu.style.display = 'flex';
+    canvasElement.style.display = 'none';
+  });
 });

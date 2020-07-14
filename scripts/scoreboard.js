@@ -4,13 +4,7 @@ class Scoreboard {
   }
 
   runLogic() {
-    this.clean();
     this.paint();
-  }
-
-  clean() {
-    const context = this.game.context;
-    context.clearRect(0, 0, 700, 500);
   }
 
   paint() {

@@ -1,55 +1,79 @@
 class Player {
   constructor(game) {
     this.game = game;
-    this.word = this.randomWords();
+    this.word = '';
     this.input = '';
     this.score = 0;
-
-    this.checkInputWord();
-  }
-
-  randomWords() {
-    const tenLetterWords = [
+    this.arrayOfWords = [
       'washington',
       'characters',
       'blackboard',
       'gymnastics',
       'ubiquitous'
     ];
+    this.typedWords = [];
 
-    const generateRandomIndex = Math.floor(
-      Math.random() * tenLetterWords.length
-    );
-    const generateRandomWord = tenLetterWords[generateRandomIndex];
-    return generateRandomWord;
+    this.randomWords();
+    this.checkInputWord();
+  }
+
+  randomWords() {
+    if (this.arrayOfWords.length > 0) {
+      const generateRandomIndex = Math.floor(
+        Math.random() * this.arrayOfWords.length
+      );
+      const generateRandomWord = this.arrayOfWords[generateRandomIndex];
+      this.word = generateRandomWord;
+
+      this.arrayOfWords.splice(generateRandomIndex, 1);
+    } else {
+      this.word = 'You won';
+    }
   }
 
   checkInputWord() {
     window.addEventListener('keydown', event => {
       const key = event.key;
       const keyCode = event.keyCode;
-      if (keyCode >= 65 && keyCode <= 90) {
+      if (keyCode >= 65 && keyCode <= 90 && this.input.length < 10) {
         this.input += key;
+        this.runLogic();
+      } else {
+        this.wrongWord();
       }
+      //backspace is pressed
       if (keyCode === 8) {
         this.input = this.input
           .split('')
           .splice(0, this.input.length - 1)
           .join('');
+        this.runLogic();
       }
       //enter is pressed
       if (keyCode === 13) {
         if (this.input === this.word) {
           this.score++;
-          this.game.scoreboard.runLogic();
-          this.word = this.randomWords();
+          this.typedWords.push(this.word);
+          this.randomWords();
           this.input = '';
+          this.runLogic();
+        } else {
+          this.wrongWord();
         }
       }
-
-      // paint the input
-      this.runLogic();
+      this.paintInput();
     });
+  }
+
+  wrongWord() {
+    const context = this.game.context;
+
+    context.save();
+
+    context.fillStyle = 'red';
+    context.fillRect(150, 360, 400, 50);
+
+    context.restore();
   }
 
   clean() {
@@ -57,10 +81,22 @@ class Player {
     context.clearRect(0, 0, 600, 500);
   }
 
+  paintInput() {
+    const context = this.game.context;
+    const input = this.input;
+
+    context.save();
+
+    context.fillStyle = 'black';
+    context.font = '36px sans-serif';
+    context.fillText(input, 250, 400);
+
+    context.restore();
+  }
+
   paint() {
     const context = this.game.context;
     const word = this.word;
-    const input = this.input;
 
     //paint random word
     context.save();
@@ -71,20 +107,11 @@ class Player {
     context.fillText(word, 250, 200);
 
     context.restore();
-
-    //paint input
-    context.save();
-
-    context.fillStyle = 'black';
-    context.font = '36px sans-serif';
-    context.fillText(input, 250, 400);
-
-    context.restore();
   }
 
   runLogic() {
     this.clean();
     this.paint();
-    this.game.scoreboard.paint();
+    this.game.scoreboard.runLogic();
   }
 }

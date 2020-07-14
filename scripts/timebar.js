@@ -1,8 +1,9 @@
 class Timebar {
   constructor(game) {
     this.game = game;
-    this.timer = game.duration; //60; //60 -> 30seg
-    this.i = 20;
+    this.timer = game.duration;
+    this.i = 20; //starting position for timebar
+    this.running = true;
   }
 
   runLogic() {
@@ -32,16 +33,21 @@ class Timebar {
 
   stopGame() {
     if (this.i > 500) {
-      this.game.stopGame();
+      if (this.running) {
+        this.game.stopGame();
+        this.running = false;
+      }
     }
   }
 
   loop() {
     this.paint();
 
-    setTimeout(() => {
-      this.loop();
-      this.stopGame();
-    }, this.timer);
+    if (this.running) {
+      setTimeout(() => {
+        this.loop();
+        this.stopGame();
+      }, this.timer);
+    }
   }
 }
