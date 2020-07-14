@@ -1,9 +1,8 @@
 class Game {
-  constructor(canvas) {
+  constructor(canvas, duration) {
     this.canvas = canvas;
+    this.duration = duration;
     this.context = canvas.getContext('2d');
-
-    this.timer = 60;
 
     this.player = new Player(this);
 
@@ -26,6 +25,14 @@ class Game {
     this.player.paint();
     this.scoreboard.paint();
     this.timebar.paint();
+  }
+
+  stopGame() {
+    const canvasElement = document.getElementById('game');
+    const startMenu = document.getElementById('start-game');
+
+    startMenu.style.display = 'flex';
+    canvasElement.style.display = 'none';
   }
 
   loop() {

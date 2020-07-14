@@ -7,7 +7,31 @@
     <link href="styles/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <div id="start-game">
+      <button id="start-button">Start Game</button>
+      <p>Choose the duration</p>
+
+      <div id="time-div">
+        <div>
+          <input type="radio" id="15-seg" name="timer" value="15" />
+          <label for="15">15'</label>
+        </div>
+
+        <div>
+          <input type="radio" id="30-seg" name="timer" value="30" checked />
+          <label for="30">30'</label>
+        </div>
+
+        <div>
+          <input type="radio" id="45-seg" name="timer" value="45" />
+          <label for="45">45'</label>
+        </div>
+      </div>
+    </div>
+
     <canvas id="game" width="700" height="500"></canvas>
+
+    <div id="end-game"></div>
 
     <script src="/scripts/player.js"></script>
 

@@ -54,12 +54,13 @@ class Player {
 
   clean() {
     const context = this.game.context;
-    context.clearRect(0, 0, 700, 500);
+    context.clearRect(0, 0, 600, 500);
   }
 
   paint() {
     const context = this.game.context;
     const word = this.word;
+    const input = this.input;
 
     //paint random word
     context.save();
@@ -76,7 +77,7 @@ class Player {
 
     context.fillStyle = 'black';
     context.font = '36px sans-serif';
-    context.fillText(this.input, 250, 400);
+    context.fillText(input, 250, 400);
 
     context.restore();
   }

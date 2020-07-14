@@ -1,7 +1,7 @@
 class Timebar {
   constructor(game) {
     this.game = game;
-    // this.timer = 60;
+    this.timer = game.duration; //60; //60 -> 30seg
     this.i = 20;
   }
 
@@ -30,11 +30,18 @@ class Timebar {
     context.restore();
   }
 
+  stopGame() {
+    if (this.i > 500) {
+      this.game.stopGame();
+    }
+  }
+
   loop() {
     this.paint();
 
     setTimeout(() => {
       this.loop();
+      this.stopGame();
     }, this.timer);
   }
 }
