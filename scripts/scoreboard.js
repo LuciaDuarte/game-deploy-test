@@ -13,9 +13,9 @@ class Scoreboard {
 
     context.save();
 
-    context.font = '32px sans-serif';
+    context.font = '32px Courier New';
 
-    context.fillText('Words: ' + score, 50, 50);
+    context.fillText('Words: ' + score, 10, 30);
 
     context.restore();
   }

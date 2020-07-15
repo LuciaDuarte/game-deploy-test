@@ -38,8 +38,18 @@ window.addEventListener('load', () => {
   }
 
   restartButton.addEventListener('click', () => {
+    const typedWordsDiv = document.getElementById('typed-words');
+
     endMenu.style.display = 'none';
     startMenu.style.display = 'flex';
     canvasElement.style.display = 'none';
+
+    function removeAllChildren(element) {
+      while (element.firstChild) {
+        element.removeChild(element.firstChild);
+      }
+    }
+
+    removeAllChildren(typedWordsDiv);
   });
 });

@@ -3,28 +3,30 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Word Game</title>
+    <title>Ninja Keys</title>
     <link href="styles/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <div id="start-game">
-      <button id="start-button">Start Game</button>
-      <p>Choose the duration</p>
+      <div id="start-elements">
+        <button id="start-button" class="game-btn">Start Game</button>
+        <p>Choose the duration</p>
 
-      <div id="time-div">
-        <div>
-          <input type="radio" id="15-seg" name="timer" value="15" />
-          <label for="15">15'</label>
-        </div>
+        <div id="time-div">
+          <div class="radio-btns">
+            <input type="radio" id="15" name="timer" value="15" />
+            <label for="15">15"</label>
+          </div>
 
-        <div>
-          <input type="radio" id="30-seg" name="timer" value="30" checked />
-          <label for="30">30'</label>
-        </div>
+          <div class="radio-btns">
+            <input type="radio" id="30" name="timer" value="30" checked />
+            <label for="30">30"</label>
+          </div>
 
-        <div>
-          <input type="radio" id="45-seg" name="timer" value="45" />
-          <label for="45">45'</label>
+          <div class="radio-btns">
+            <input type="radio" id="45" name="timer" value="45" />
+            <label for="45">45"</label>
+          </div>
         </div>
       </div>
     </div>
@@ -32,11 +34,12 @@
     <canvas id="game" width="700" height="500"></canvas>
 
     <div id="end-game">
-      <div id="typed-words">
-        <p>Your words:</p>
-      </div>
-      <button id="restart-button">Restart</button>
+      <p>Your words:</p>
+      <div id="typed-words"></div>
+      <button id="restart-button" class="game-btn">Restart</button>
     </div>
+
+    <script src="/scripts/words.js"></script>
 
     <script src="/scripts/scoreboard.js"></script>
 

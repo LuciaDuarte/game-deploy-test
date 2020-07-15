@@ -4,13 +4,8 @@ class Player {
     this.word = '';
     this.input = '';
     this.score = 0;
-    this.arrayOfWords = [
-      'washington',
-      'characters',
-      'blackboard',
-      'gymnastics',
-      'ubiquitous'
-    ];
+    this.arrayOfWords = tenLetterWords;
+
     this.typedWords = [];
 
     this.randomWords();
@@ -88,7 +83,7 @@ class Player {
     context.save();
 
     context.fillStyle = 'black';
-    context.font = '36px sans-serif';
+    context.font = '36px Courier New';
     context.fillText(input, 250, 400);
 
     context.restore();
@@ -102,9 +97,17 @@ class Player {
     context.save();
 
     context.fillStyle = 'black';
-    context.font = '36px sans-serif';
+    context.font = '46px Courier New';
 
-    context.fillText(word, 250, 200);
+    context.fillText(word, 210, 200);
+
+    context.restore();
+
+    //paint input rectangle
+    context.save();
+
+    context.fillStyle = 'white';
+    context.fillRect(150, 360, 400, 50);
 
     context.restore();
   }
