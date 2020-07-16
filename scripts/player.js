@@ -1,3 +1,8 @@
+const errorAudio = new Audio('/sounds/error_008.ogg');
+const correctAudio = new Audio(
+  '/sounds/243567__sonictechtonic__airy-whoosh-left-to-right (mp3cut.net) (2).wav'
+);
+
 class Player {
   constructor(game) {
     this.game = game;
@@ -22,9 +27,50 @@ class Player {
 
       this.arrayOfWords.splice(generateRandomIndex, 1);
     } else {
-      this.word = 'You won';
+      this.word = `
+      あなたが勝つ`;
     }
   }
+
+  // checkInputWord() {
+  //   window.addEventListener('keydown', event => {
+  //     const key = event.key;
+  //     const keyCode = event.keyCode;
+  //     if (
+  //       keyCode >= 65 &&
+  //       keyCode <= 90 &&
+  //       this.input.length < 10 &&
+  //       this.input.length >= 0
+  //     ) {
+  //       this.input += key;
+  //       this.runLogic();
+  //     } else {
+  //       this.wrongWord();
+  //     }
+  //     //backspace is pressed
+  //     if (keyCode === 8) {
+  //       this.input = this.input
+  //         .split('')
+  //         .splice(0, this.input.length - 1)
+  //         .join('');
+  //       this.runLogic();
+  //     }
+  //     //enter is pressed
+  //     if (keyCode === 13) {
+  //       if (this.input === this.word) {
+  //         this.score++;
+  //         this.typedWords.push(this.word);
+  //         this.randomWords();
+  //         this.input = '';
+  //         this.runLogic();
+  //       } else {
+  //         // errorAudio.play();
+  //         this.wrongWord();
+  //       }
+  //     }
+  //     this.paintInput();
+  //   });
+  // }
 
   checkInputWord() {
     window.addEventListener('keydown', event => {
@@ -33,20 +79,17 @@ class Player {
       if (keyCode >= 65 && keyCode <= 90 && this.input.length < 10) {
         this.input += key;
         this.runLogic();
-      } else {
-        this.wrongWord();
-      }
-      //backspace is pressed
-      if (keyCode === 8) {
+        //backspace is pressed
+      } else if (keyCode === 8) {
         this.input = this.input
           .split('')
           .splice(0, this.input.length - 1)
           .join('');
         this.runLogic();
-      }
-      //enter is pressed
-      if (keyCode === 13) {
+        //enter is pressed
+      } else if (keyCode === 13) {
         if (this.input === this.word) {
+          correctAudio.play();
           this.score++;
           this.typedWords.push(this.word);
           this.randomWords();
@@ -55,20 +98,35 @@ class Player {
         } else {
           this.wrongWord();
         }
+      } else {
+        this.wrongWord();
       }
       this.paintInput();
     });
   }
 
   wrongWord() {
+    errorAudio.play();
     const context = this.game.context;
 
     context.save();
 
     context.fillStyle = 'red';
-    context.fillRect(150, 360, 400, 50);
+    context.fillRect(175, 340, 350, 60);
 
     context.restore();
+  }
+
+  bestScore() {
+    const currentScore = this.score;
+    let bestScore = localStorage.getItem('BestScore');
+    if (currentScore > bestScore) {
+      localStorage.BestScore = currentScore;
+    }
+
+    let scoreToPrint = localStorage.getItem('BestScore');
+
+    return scoreToPrint;
   }
 
   clean() {
@@ -83,8 +141,8 @@ class Player {
     context.save();
 
     context.fillStyle = 'black';
-    context.font = '36px Courier New';
-    context.fillText(input, 250, 400);
+    context.font = '40px Courier New';
+    context.fillText(input, 230, 380);
 
     context.restore();
   }
@@ -103,11 +161,19 @@ class Player {
 
     context.restore();
 
-    //paint input rectangle
+    //paint input rectangles
+
+    context.save();
+
+    context.fillStyle = 'black';
+    context.fillRect(170, 335, 360, 70);
+
+    context.restore();
+
     context.save();
 
     context.fillStyle = 'white';
-    context.fillRect(150, 360, 400, 50);
+    context.fillRect(175, 340, 350, 60);
 
     context.restore();
   }

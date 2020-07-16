@@ -1,3 +1,8 @@
+const endAudio = new Audio('/sounds/482783__mattiagiovanetti__ninja-tune.wav');
+const runningOutOfTime = new Audio(
+  '/sounds/487726__matrixxx__ticking-timer-30-sec.wav'
+);
+
 class Game {
   constructor(canvas, duration) {
     this.canvas = canvas;
@@ -34,6 +39,8 @@ class Game {
     endMenu.style.display = 'flex';
     canvasElement.style.display = 'none';
 
+    endAudio.play();
+
     //display words in the end
     const typedWordsArray = this.player.typedWords;
 
@@ -46,6 +53,15 @@ class Game {
       description += word;
       wordElement.innerText = description;
     }
+
+    const score = `Best Score: ${this.player.bestScore()}`;
+    const currentScore = `Your Score: ${this.player.score}`;
+
+    const scoreElement = document.getElementById('best-score');
+    scoreElement.innerText = score;
+
+    const currentScoreElement = document.getElementById('current-score');
+    currentScoreElement.innerText = currentScore;
   }
 
   loop() {

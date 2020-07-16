@@ -22,9 +22,20 @@ class Timebar {
 
     context.save();
 
-    context.fillStyle = 'black';
+    const green = '#5EA170';
+    const yellow = '#F8E919';
+    const red = '#EA4335';
 
     this.i++;
+
+    if (this.i >= 20 && this.i < 160) {
+      context.fillStyle = green;
+    } else if (this.i >= 160 && this.i < 320) {
+      context.fillStyle = yellow;
+    } else {
+      runningOutOfTime.play();
+      context.fillStyle = red;
+    }
 
     context.fillRect(650, this.i, 30, 480);
 
@@ -33,6 +44,7 @@ class Timebar {
 
   stopGame() {
     if (this.i > 500) {
+      runningOutOfTime.pause();
       if (this.running) {
         this.game.stopGame();
         this.running = false;

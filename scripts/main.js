@@ -1,4 +1,7 @@
 window.addEventListener('load', () => {
+  const timeAudio = new Audio('/sounds/select_008.ogg');
+  const startAudio = new Audio('/sounds/drop_003.ogg');
+
   const canvasElement = document.getElementById('game');
   const startMenu = document.getElementById('start-game');
   const endMenu = document.getElementById('end-game');
@@ -8,12 +11,19 @@ window.addEventListener('load', () => {
 
   const timerOptions = document.querySelectorAll('input');
 
+  const timerButtons = document.getElementById('time-div');
+
   const fifteen = timerOptions[0];
   const thirty = timerOptions[1];
   const fortyfive = timerOptions[2];
 
   startButton.addEventListener('click', () => {
+    startAudio.play();
     duration();
+  });
+
+  timerButtons.addEventListener('click', () => {
+    timeAudio.play();
   });
 
   const startGame = () => {
@@ -38,6 +48,8 @@ window.addEventListener('load', () => {
   }
 
   restartButton.addEventListener('click', () => {
+    endAudio.pause();
+
     const typedWordsDiv = document.getElementById('typed-words');
 
     endMenu.style.display = 'none';
