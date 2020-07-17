@@ -17,6 +17,8 @@ window.addEventListener('load', () => {
   const thirty = timerOptions[1];
   const fortyfive = timerOptions[2];
 
+  const game = new Game(canvasElement);
+
   startButton.addEventListener('click', () => {
     startAudio.play();
     duration();
@@ -29,20 +31,24 @@ window.addEventListener('load', () => {
   const startGame = () => {
     startMenu.style.display = 'none';
     canvasElement.style.display = 'flex';
+    game.restart();
   };
 
   function duration() {
     if (fifteen.checked === true) {
       startGame();
-      const game = new Game(canvasElement, 30);
+      game.duration = 30;
+      game.gameStarted = true;
       game.loop();
     } else if (thirty.checked === true) {
       startGame();
-      const game = new Game(canvasElement, 60);
+      game.duration = 60;
+      game.gameStarted = true;
       game.loop();
     } else if (fortyfive.checked === true) {
       startGame();
-      const game = new Game(canvasElement, 90);
+      game.duration = 90;
+      game.gameStarted = true;
       game.loop();
     }
   }

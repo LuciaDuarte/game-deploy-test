@@ -4,16 +4,15 @@ const runningOutOfTime = new Audio(
 );
 
 class Game {
-  constructor(canvas, duration) {
+  constructor(canvas) {
+    this.gameStarted = false;
     this.canvas = canvas;
-    this.duration = duration;
+    this.duration = 0;
     this.context = canvas.getContext('2d');
 
     this.player = new Player(this);
 
     this.scoreboard = new Scoreboard(this);
-
-    this.timebar = new Timebar(this);
   }
 
   runLogic() {
@@ -32,12 +31,19 @@ class Game {
     this.timebar.paint();
   }
 
+  restart() {
+    this.player.restart();
+    this.gameStarted = false;
+  }
+
   stopGame() {
     const canvasElement = document.getElementById('game');
     const endMenu = document.getElementById('end-game');
 
     endMenu.style.display = 'flex';
     canvasElement.style.display = 'none';
+
+    this.gameStarted = false;
 
     endAudio.play();
 
@@ -65,6 +71,10 @@ class Game {
   }
 
   loop() {
+    if (this.gameStarted) {
+      this.timebar = new Timebar(this);
+    }
+
     // Run logic
     this.runLogic();
 

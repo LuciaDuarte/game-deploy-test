@@ -1,7 +1,7 @@
-const errorAudio = new Audio('/sounds/error_008.ogg');
 const correctAudio = new Audio(
   '/sounds/243567__sonictechtonic__airy-whoosh-left-to-right (mp3cut.net) (2).wav'
 );
+const errorAudio = new Audio('/sounds/error_008.ogg');
 
 class Player {
   constructor(game) {
@@ -15,6 +15,13 @@ class Player {
 
     this.randomWords();
     this.checkInputWord();
+  }
+
+  restart() {
+    this.input = '';
+    this.randomWords();
+    this.score = 0;
+    this.typedWords = [];
   }
 
   randomWords() {
@@ -32,55 +39,17 @@ class Player {
     }
   }
 
-  // checkInputWord() {
-  //   window.addEventListener('keydown', event => {
-  //     const key = event.key;
-  //     const keyCode = event.keyCode;
-  //     if (
-  //       keyCode >= 65 &&
-  //       keyCode <= 90 &&
-  //       this.input.length < 10 &&
-  //       this.input.length >= 0
-  //     ) {
-  //       this.input += key;
-  //       this.runLogic();
-  //     } else {
-  //       this.wrongWord();
-  //     }
-  //     //backspace is pressed
-  //     if (keyCode === 8) {
-  //       this.input = this.input
-  //         .split('')
-  //         .splice(0, this.input.length - 1)
-  //         .join('');
-  //       this.runLogic();
-  //     }
-  //     //enter is pressed
-  //     if (keyCode === 13) {
-  //       if (this.input === this.word) {
-  //         this.score++;
-  //         this.typedWords.push(this.word);
-  //         this.randomWords();
-  //         this.input = '';
-  //         this.runLogic();
-  //       } else {
-  //         // errorAudio.play();
-  //         this.wrongWord();
-  //       }
-  //     }
-  //     this.paintInput();
-  //   });
-  // }
-
   checkInputWord() {
     window.addEventListener('keydown', event => {
       const key = event.key;
       const keyCode = event.keyCode;
       if (keyCode >= 65 && keyCode <= 90 && this.input.length < 10) {
+        event.preventDefault();
         this.input += key;
         this.runLogic();
         //backspace is pressed
       } else if (keyCode === 8) {
+        event.preventDefault();
         this.input = this.input
           .split('')
           .splice(0, this.input.length - 1)
@@ -88,12 +57,13 @@ class Player {
         this.runLogic();
         //enter is pressed
       } else if (keyCode === 13) {
+        event.preventDefault();
         if (this.input === this.word) {
+          this.input = '';
           correctAudio.play();
           this.score++;
           this.typedWords.push(this.word);
           this.randomWords();
-          this.input = '';
           this.runLogic();
         } else {
           this.wrongWord();
@@ -136,7 +106,7 @@ class Player {
 
   paintInput() {
     const context = this.game.context;
-    const input = this.input;
+    let input = this.input;
 
     context.save();
 

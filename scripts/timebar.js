@@ -54,7 +54,6 @@ class Timebar {
 
   loop() {
     this.paint();
-
     if (this.running) {
       setTimeout(() => {
         this.loop();
