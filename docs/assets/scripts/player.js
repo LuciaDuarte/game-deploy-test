@@ -1,5 +1,5 @@
 const correctAudio = new Audio(
-  '/sounds/243567__sonictechtonic__airy-whoosh-left-to-right (mp3cut.net) (2).wav'
+  '../sounds/243567__sonictechtonic__airy-whoosh-left-to-right (mp3cut.net) (2).wav'
 );
 const errorAudio = new Audio('/sounds/error_008.ogg');
 

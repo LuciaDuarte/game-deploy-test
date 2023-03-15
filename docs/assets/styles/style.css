@@ -12,7 +12,7 @@ body {
 }
 
 #start-game {
-  background-image: url('./docs/assets/images/start.png');
+  background-image: url('/docs/assets/images/start.png');
   width: 700px;
   height: 500px;
   display: flex;
@@ -100,14 +100,14 @@ body {
 }
 
 canvas {
-  background-image: url(./docs/assets/images/background.png);
+  background-image: url(/docs/assets/images/background.png);
   display: none;
   justify-content: center;
   align-items: center;
 }
 
 #end-game {
-  background-image: url(./docs/assets/images/background.png);
+  background-image: url(/docs/assets/images/background.png);
   width: 700px;
   height: 500px;
   display: none;

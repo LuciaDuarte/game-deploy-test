@@ -1,6 +1,6 @@
 window.addEventListener('load', () => {
-  const timeAudio = new Audio('/sounds/select_008.ogg');
-  const startAudio = new Audio('/sounds/drop_003.ogg');
+  const timeAudio = new Audio('../sounds/select_008.ogg');
+  const startAudio = new Audio('../sounds/drop_003.ogg');
 
   const canvasElement = document.getElementById('game');
   const startMenu = document.getElementById('start-game');

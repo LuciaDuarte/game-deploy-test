@@ -1,6 +1,8 @@
-const endAudio = new Audio('/sounds/482783__mattiagiovanetti__ninja-tune.wav');
+const endAudio = new Audio(
+  '../sounds/482783__mattiagiovanetti__ninja-tune.wav'
+);
 const runningOutOfTime = new Audio(
-  '/sounds/487726__matrixxx__ticking-timer-30-sec.wav'
+  '../sounds/487726__matrixxx__ticking-timer-30-sec.wav'
 );
 
 class Game {
